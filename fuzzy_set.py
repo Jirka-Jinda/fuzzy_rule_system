@@ -21,6 +21,8 @@ class fuzzy_set:
         return self.elements[index][0]
     def degree(self, index):
         return self.elements[index][1]
+    def length(self):
+        return int(self.elements.size / 2)
 
     ##### SET #####
     def set_value(self, index, value):
@@ -30,7 +32,10 @@ class fuzzy_set:
 
     ##### FUNCS #####
     def is_singleton(self):
-        pass
+        if self.length() == 1:
+            return True
+        else:
+            return False
 
     def aplha_cut(self, threshold):
         pass
