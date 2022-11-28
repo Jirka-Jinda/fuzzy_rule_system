@@ -6,6 +6,7 @@ import fuzzy_set_operations
 import fuzzification
 import inference
 import deffuzification
+import rules
 import graph_drawing as gd
 
 # def controller(rules, input):

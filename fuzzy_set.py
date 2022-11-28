@@ -1,7 +1,7 @@
 import numpy as np
 
 class context:
-    def __init__(self, U='R', L='[0,1]'):
+    def __init__(self, U='Z', L='[0,1]'):
         self.universum = U
         self.degrees = L
 

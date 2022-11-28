@@ -6,14 +6,14 @@ def fuzzificate(input: list[int]) -> fs.fuzzy_set:
     # if input is singleton create singleton fuzzy set
     if len(input) == 1:
         return fuzzificate_singleton(input[0])
-    # else we have a set, consider every value a singleton and aggregate results
+    # else we have a set, consider every value a singleton and union results
     else:
         result = fs.fuzzy_set([])
         for singleton in input:
-            fo.aggregation(result, fuzzificate(singleton))
+            fo.union(result, fuzzificate(singleton))
         return result
-        
-# concrete approach to fuzzificate a singleton
+
+# concrete approach to fuzzification of a singleton
 def fuzzificate_singleton(input):
     return create_narrow_fs(input)
     #return create_singleton(input)
@@ -26,7 +26,8 @@ def create_singleton(input):
 # No. 2 - Narrow fuzzy set
 def create_narrow_fs(input):
     degree = 1
+    factor = 0.3
     return fs.fuzzy_set([
-        (input - 1, degree * 0.5),
+        (input - 1, degree * factor),
         (input, degree),
-        (input + 1, degree * 0.5)])
+        (input + 1, degree * factor)])
