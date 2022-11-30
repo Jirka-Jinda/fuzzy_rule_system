@@ -1,7 +1,7 @@
 import fuzzy_set as fs
 import fuzzy_set_operations as fo
 
-# method to transform arbitrary inputs into fuzzy set
+# method of transforming arbitrary inputs into fuzzy set
 def fuzzificate(input: list[int]) -> fs.fuzzy_set:
     # if input is singleton create singleton fuzzy set
     if len(input) == 1:
@@ -13,7 +13,7 @@ def fuzzificate(input: list[int]) -> fs.fuzzy_set:
             fo.union(result, fuzzificate(singleton))
         return result
 
-# concrete approach to fuzzification of a singleton
+# concrete approach of fuzzification of a singleton
 def fuzzificate_singleton(input):
     return create_narrow_fs(input)
     #return create_singleton(input)
