@@ -38,8 +38,8 @@ init2.append((12, 0.5))
 f_set1 = fuzzy_set.fuzzy_set(init)
 f_set2 = fuzzy_set.fuzzy_set(init2)
 f_sets = [f_set1, f_set2]
-#gd.draw_fuzzy_sets(f_sets)
+gd.draw_graph(f_sets)
 
-fuzz = fuzzification.fuzzificate([5,6,8,10,11,17])
-defuzz = deffuzification.deffuzificate(fuzz)
-gd.draw_graph([fuzz, defuzz])
+# fuzz = fuzzification.fuzzificate([5,6,8,10,11,17])
+# defuzz = deffuzification.deffuzificate(fuzz)
+# gd.draw_graph([fuzz, defuzz])

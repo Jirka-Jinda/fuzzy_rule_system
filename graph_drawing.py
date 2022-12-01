@@ -33,5 +33,5 @@ def draw_graph(sets):
         elif isinstance(set, list):
             temp.append(f.create_crisp_fs(set))
         else:
-            raise ValueError("Couldn't identify type of param")
+            raise ValueError("Couldn't identify type of argument.")
     draw_fuzzy_sets(temp)
