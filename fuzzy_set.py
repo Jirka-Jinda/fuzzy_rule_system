@@ -16,7 +16,7 @@ class fuzzy_set:
     def L(self):
         return self.context.degrees
     def element(self, index):
-        return self.elements[index]
+        return (self.value(index), self.degree(index))
     def value(self, index):
         return self.elements[index][0]
     def degree(self, index):
@@ -31,6 +31,7 @@ class fuzzy_set:
         self.elements[index] = (self.value(index), value)
 
     ##### FUNCS #####
+
     def is_singleton(self):
         if self.length() == 1:
             return True
