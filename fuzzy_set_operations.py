@@ -32,20 +32,6 @@ def negation(A: fuzzy_set):
         result.set_degree(k, 1 - A.degree(k))
     return result
 
-##### TRUTH OPERATIONS #####
-
-def f_and(x: tuple, y: tuple):
-    #methods: _union_Goguen, _union_Godel, _union_Lukas
-    return gen_and(x, y, _union_Goguen)
-
-def f_or(x: tuple, y: tuple):
-    #methods:
-    pass
-
-def f_neg(x: tuple):
-    #methods:
-    pass
-
 ##### GENERAL FUNCS #####
 
 def sum_values(A: fuzzy_set):
@@ -73,6 +59,21 @@ def contains_value(A: fuzzy_set, value):
         if A.value(k) == value:
             return k
     return -1
+
+    
+##### TRUTH OPERATIONS #####
+
+def f_and(x: tuple, y: tuple):
+    #methods: _union_Goguen, _union_Godel, _union_Lukas
+    return gen_and(x, y, _union_Goguen)
+
+def f_or(x: tuple, y: tuple):
+    #methods:
+    pass
+
+def f_neg(x: tuple):
+    #methods:
+    pass
 
 ##### IMPLEMENTATION #####
 

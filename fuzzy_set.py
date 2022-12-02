@@ -40,4 +40,5 @@ class fuzzy_set:
 
     def aplha_cut(self, threshold):
         pass
+    
 
