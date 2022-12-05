@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
 import fuzzy_set as fs
 import fuzzification as f
 
@@ -35,3 +36,14 @@ def draw_graph(sets):
         else:
             raise ValueError("Couldn't identify type of argument.")
     draw_fuzzy_sets(temp)
+
+# def draw_matrix():
+#     ax = plt.axes(projection='3d')
+
+
+
+#     ax.set_xlabel()
+#     ax.set_ylabel()
+#     ax.set_zlabel()
+#     plt.show()
+    

@@ -60,35 +60,11 @@ def contains_value(A: fuzzy_set, value):
             return k
     return -1
 
-    
-##### TRUTH OPERATIONS #####
+##### T-NORMS, CONORMS #####
 
-def f_and(x: tuple, y: tuple):
-    #methods: _union_Goguen, _union_Godel, _union_Lukas
-    return gen_and(x, y, _union_Goguen)
-
-def f_or(x: tuple, y: tuple):
-    #methods:
-    pass
-
-def f_neg(x: tuple):
-    #methods:
-    pass
-
-##### IMPLEMENTATION #####
-
-def gen_and(x: tuple, y: tuple, operation):
-    pass
-def gen_or(x: tuple, y: tuple, operation):
-    pass
-def gen_neg(x: tuple, y: tuple, operation):
-    pass
-
-def _union_Godel(x, y):
+def tnorm_Godel(x, y):
     return min(x, y)
-def _union_Lukas(x, y):
+def tnorm_Lukas(x, y):
     return max(0, x + y - 1)
-def _union_Goguen(x, y):
+def tnorm_Goguen(x, y):
     return x * y
-
-

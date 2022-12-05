@@ -7,7 +7,9 @@ import fuzzification
 import inference
 import deffuzification
 import rules
-import graph_drawing as gd
+import graph_drawing
+import numpy
+import sys
 
 # def controller(rules, input):
 #     fuzzy_input = fuzzification.fuzzificate(input)
@@ -15,31 +17,8 @@ import graph_drawing as gd
 #     output = deffuzification.deffuzificate(fuzzy_output)
 #     return output
 
-init = []
-init.append((5, 0.3))
-init.append((6, 0.5))
-init.append((7, 0.8))
-init.append((8, 1))
-init.append((9, 1))
-init.append((10, 0.9))
-init.append((11, 0.8))
-init.append((12, 0.5))
-init.append((13, 0.2))
-
-init2 = []
-init2.append((6, 1))
-init2.append((7, 1))
-init2.append((8, 0.3))
-init2.append((9, 0.2))
-init2.append((10, 0.1))
-init2.append((11, 0.5))
-init2.append((12, 0.5))
-
-f_set1 = fuzzy_set.fuzzy_set(init)
-f_set2 = fuzzy_set.fuzzy_set(init2)
-f_sets = [f_set1, f_set2]
-gd.draw_graph(f_sets)
-
-# fuzz = fuzzification.fuzzificate([5,6,8,10,11,17])
-# defuzz = deffuzification.deffuzificate(fuzz)
-# gd.draw_graph([fuzz, defuzz])
+res = rules.test_rules()
+graph_drawing.draw_graph(res)
+numpy.set_printoptions(threshold=sys.maxsize)
+print(rules.create_relation_matrix(res[0],res[0]))
+print()

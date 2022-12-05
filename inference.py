@@ -6,5 +6,5 @@ import fuzzy_set_operations as fo
 # rukopis: http://belohlavek.inf.upol.cz/vyuka/UI-6-fuzzy-rules.pdf
 # 3D grafy: https://jakevdp.github.io/PythonDataScienceHandbook/04.12-three-dimensional-plotting.html
 
-def infer():
+def infer(rule_i, input_i):
     pass
