@@ -32,12 +32,6 @@ def weather_rules_set(discretion_factor=0):
 def room_temperature_rules_set(discretion_factor=0):
     pass
 
-def test_rules():
-    I = fs.fuzzy_generator([0,1,2,3,4,5,6],[1,1,0,0,1,0],0)
-    O = fs.fuzzy_generator([0,1,2,3],[1,0.5,0],0)
-    return [I,O]
-
-
 ########## Input-Output relation ############
 
 def create_relation_matrix(input_set: fs.fuzzy_set, output_set: fs.fuzzy_set, operation=fo.tnorm_Lukas):
@@ -50,3 +44,4 @@ def create_relation_matrix(input_set: fs.fuzzy_set, output_set: fs.fuzzy_set, op
             result[k][i] = operation(input_set.degree(k), output_set.degree(i))
 
     return result
+

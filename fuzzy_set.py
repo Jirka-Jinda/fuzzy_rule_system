@@ -15,6 +15,8 @@ class fuzzy_set:
         return self.context.universum
     def L(self):
         return self.context.degrees
+    def elements(self):
+        return self.elements
     def element(self, index):
         return (self.value(index), self.degree(index))
     def value(self, index):

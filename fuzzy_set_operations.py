@@ -68,3 +68,14 @@ def tnorm_Lukas(x, y):
     return max(0, x + y - 1)
 def tnorm_Goguen(x, y):
     return x * y
+
+########## Matrix conversion ##########
+
+def rule_to_matrix(rule):
+    return np.matrix(rule)
+
+def matrix_to_fs(matrix: np.matrix):
+    pass
+
+def fs_to_matrix(min_val: int, max_val: int, fs: fuzzy_set.fuzzy_set) -> np.matrix:
+    pass
