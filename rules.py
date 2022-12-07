@@ -4,8 +4,9 @@ import numpy as np
 
 def weather_rules_set(discretion_factor=0):
     # 0-11 low; 12-29 meduium; 30-39 strong; 49-50 very_strong_wind; 50-115 storm
-    # hm/h
-    wind_grades = fs.fuzzy_generator([0, 11, 29, 39, 49, 115], [1, 0.7, 0.5, 0.7, 1], discretion_factor)
+    # hm/h, [1, 0.7, 0.5, 0.7, 1]
+    # wind_grades = fs.fuzzy_generator([0, 11, 29, 39, 49, 115], [1, 0.7, 0.4, 0.2, 0], discretion_factor)
+    wind_grades = fs.fuzzy_generator([0, 2, 3], [0,1], discretion_factor)
     # 0-2.5 low; 2.6-8 medium; 8.1-40 high; 40-100 drowning
     # mm/m^2 per hour, 1mm/m^2 =~ 1l per m^2
     rain_grades = fs.fuzzy_generator([0, 3, 8, 40, 100], [1, 0.7, 0.3, 0], discretion_factor)
@@ -19,7 +20,8 @@ def weather_rules_set(discretion_factor=0):
     # IF [sun is DIRECT SUNLIGHT] THEN [yes]
 
     # Output space:
-    umbrella_grades = fs.fuzzy_generator([0, 40, 50 ,100], [0, 0.5, 1], discretion_factor)
+    umbrella_grades = fs.fuzzy_set([(0,1)])
+    # umbrella_grades = fs.fuzzy_generator([0,1], [1], discretion_factor)
     
     #Rule set:
     R = [

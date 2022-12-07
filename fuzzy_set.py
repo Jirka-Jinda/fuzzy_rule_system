@@ -15,7 +15,7 @@ class fuzzy_set:
         return self.context.universum
     def L(self):
         return self.context.degrees
-    def elements(self):
+    def all_elements(self):
         return self.elements
     def element(self, index):
         return (self.value(index), self.degree(index))
@@ -50,7 +50,7 @@ class fuzzy_set:
 def fuzzy_generator(thresholds_values: list, thresholds_degrees: list, discretion_factor):
     result = []
     rounding_mistake = 0
-    values_range = thresholds_values[len(thresholds_values) - 1] - thresholds_values[0]
+    values_range = thresholds_values[len(thresholds_values) - 1] - thresholds_values[0] + 1
 
     for k in range(len(thresholds_values)):
         smoothing = False
