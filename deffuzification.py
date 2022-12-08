@@ -6,7 +6,7 @@ def center_of_gravity(fs: fs.fuzzy_set):
     weighted_sum = 0
     degree_sum = 0
     for k in range(fs.length()):
-        weighted_sum += fs.value(k) * fs.degree(k)
+        weighted_sum += (fs.value(k) * fs.degree(k))
         degree_sum += fs.degree(k)
     return weighted_sum / degree_sum
 
@@ -31,4 +31,4 @@ def center_of_maxima(fs: fs.fuzzy_set):
 # creates "typical" value from output of inference procedure
 # There are 3 basic approaches
 def deffuzificate(fs: fs.fuzzy_set, method=center_of_gravity):
-    return [method(fs)]
+    return int(method(fs))

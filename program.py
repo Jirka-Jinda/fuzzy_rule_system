@@ -7,41 +7,76 @@ import fuzzification
 import inference
 import deffuzification
 import rules
-import graph_drawing
+import graph_drawing as gd
 import numpy
 import sys
 
-# def controller(rules, input):
-#     fuzzy_input = fuzzification.fuzzificate(input)
-#     fuzzy_output = inference.infer(rules, fuzzy_input)
-#     output = deffuzification.deffuzificate(fuzzy_output)
-#     return output
+#                     ### FUZZY PRAVIDLOVÉ SYSTÉMY ###
+#    
+#                           ┌────────────────┐
+#                           │                │
+#             Output ◄──┬───┤   Controlled   │◄──────── Input
+#                       │   │    process     │     ▲
+#                       │   │                │     │
+#                       │   └────────────────┘     │
+#                       │                          │
+#                       │     ┌────────────┐       │
+#                       │     │ Controller │       │
+#                       ▼─────┤            ├───────┘
+#                             └────────────┘
 
-rule = numpy.zeros(shape=(6,6))
-rule[0][0] = 1
-rule[0][1] = 0.5
-rule[0][2] = 0.6
-rule[1][0] = 0.5
-rule[1][1] = 1
-rule[1][2] = 0.9
-rule[2][0] = 0.6
-rule[2][1] = 0.9
-rule[2][2] = 1 
-rule[3][3] = 1
-rule[3][4] = 0.9
-rule[3][5] = 0.8
-rule[4][3] = 0.9 
-rule[4][4] = 1 
-rule[4][5] = 0.8 
-rule[5][3] = 0.8
-rule[5][4] = 0.8
-rule[5][5] = 1
+#                        ### FUZZY CONTROLLER ###
+#
+#                      ┌─────────────────────────────┐
+# ┌────────────────┐   │                             │   ┌──────────────────┐
+# │                │   │         Controller          │   │                  │
+# │ Fuzzification  ├──►├──────────────┬──────────────┼──►│ Deffuzification  │
+# │                │   │              │              │   │                  │
+# └────────────────┘   │  Inference   │    Rules     │   └──────────────────┘
+#                      │  procedure   │              │
+#                      │              │              │
+#                      └──────────────┴──────────────┘
 
-print(rule)
-input = fuzzy_set.fuzzy_set([(4,1),(2,0.4)])
-print(input.all_elements())
-temp = inference.infer([rule],[input])
-res = temp.all_elements()
-print(res)
-print("pls")
+def fuzzification_procedure(input):
+    return fuzzification.fuzzificate(input)
+
+def inference_procedure(rules, fuzzy_input):
+    return inference.infer(rules, fuzzy_input)
+
+def defuzzufication_procedure(fuzzy_ouput):    
+    return deffuzification.deffuzificate(fuzzy_ouput)
+
+
+
+
+#---------------- Auta z hodiny ---------------
+
+# input = fuzzy_set.fuzzy_set([(4,1),(2,0.4)])
+
+#------------------- Destnik -------------------
+# Mam si vzit destnik?
+
+# vitr = 5 km/h, dest = 40 mm/h, slunce = 10000 lx (denni svetlo)
+umbrella_input = [[35]]
+umbrella_fuzzy_input = []
+# fuzzifikace
+for input in umbrella_input:
+    umbrella_fuzzy_input.append([fuzzification_procedure(input)])
+# inference
+weather_rules = rules.weather_rules_set()
+umbrella_fuzzy_output = inference_procedure(weather_rules, umbrella_fuzzy_input)
+print(umbrella_fuzzy_output.all_elements())
+# deffuzifikace
+umbrella_output = defuzzufication_procedure(umbrella_fuzzy_output)
+print("Vem si destnik na", umbrella_output*10, "%.")
+
+#----------- Nelinearni fce ~ interpolace ------
+
+#
+
+# input = fuzzy_set.fuzzy_set([(4,1),(2,0.4)])
+# print(input.all_elements())
+# temp = inference.infer([rule],[input])
+# res = temp.all_elements()
+# print(res)
 

@@ -14,14 +14,12 @@ def create_narrow_fs(input):
     degree = 1
     factor = 0.5
     return fs.fuzzy_set([
-        (input - 2, 0),
         (input - 1, degree * factor),
         (input, degree),
-        (input + 1, degree * factor),
-        (input + 2, 0)])
+        (input + 1, degree * factor)])
 
 # method of transforming arbitrary inputs into fuzzy set
-def fuzzificate(input: list[int], method=create_narrow_fs) -> fs.fuzzy_set:
+def fuzzificate(input: list, method=create_singleton) -> fs.fuzzy_set:
     # if input is singleton create singleton fuzzy set
     if len(input) == 1:
         return method(input[0])
