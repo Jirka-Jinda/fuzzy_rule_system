@@ -12,10 +12,10 @@ def draw_fuzzy_sets(sets: list[fs.fuzzy_set], x_label, y_label, set_labels):
         for index in range(set.length()):
             x.append(set.value(index))
             y.append(set.degree(index))
-        if set_labels[index] == []:
+        if set_labels == []:
             name = "Set " + str(set_index + 1)
         else:
-            name = set_labels[index]
+            name = set_labels[set_index]
         color = colors[set_index % len(colors)]
         if set.length() == 1:
             style = 'o' + color

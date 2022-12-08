@@ -1,39 +1,46 @@
 import fuzzy_set as fs
 import fuzzy_set_operations as fo
 import numpy as np
+import graph_drawing as gd
 
 def weather_rules_set(discretion_factor=0):
-    # 0-11 low; 12-29 meduium; 30-39 strong; 49-50 very_strong_wind; 50-115 storm
-    # hm/h, [1, 0.7, 0.5, 0.7, 1]
+    # hm/h
     wind_grades = fs.fuzzy_generator([0, 11, 29, 39, 49, 115], [0, 0.2, 0.4, 0.7, 1], discretion_factor)
-    # 0-2.5 low; 2.6-8 medium; 8.1-40 high; 40-100 drowning
+    umbrella_wind = fs.fuzzy_set([(0,1),(1,0)])
+
     # mm/m^2 per hour, 1mm/m^2 =~ 1l per m^2
     rain_grades = fs.fuzzy_generator([0, 3, 8, 40, 100], [0, 0.3, 0.7, 1], discretion_factor)
-    # 400-sunrise,sunset; 1000-overcast; 10000-full daylight; 32000-direct sunlight
-    # lux * 10^2 = lumen/m2
-    sun_grades = fs.fuzzy_generator([0, 4, 10, 100, 320], [0, 0.4, 0.8, 1], discretion_factor)
+    umbrella_rain = fs.fuzzy_set([(0,0),(1,1)])
 
     # Do i take an umbrella? Expert says:
     # IF [wind is STRONG or more] THEN [no]
     # IF [rain is MEDIUM or more] THEN [yes]
-    # IF [sun is DIRECT SUNLIGHT] THEN [yes]
 
-    # Output space:
-    umbrella_grades = fs.fuzzy_set([(1,0)])
-    #umbrella_grades = fs.fuzzy_generator([0,1,2,3,4,5,6,7,8,9], [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1], discretion_factor)
-    
+    gd.draw_graph([rain_grades, wind_grades], set_labels=["rain","wind"])
+
     #Rule set:
     R = [
-        create_relation_matrix(wind_grades, umbrella_grades)
-        #create_relation_matrix(rain_grades, umbrella_grades),
-        #create_relation_matrix(sun_grades, umbrella_grades)
+        create_relation_matrix(wind_grades, umbrella_wind),
+        create_relation_matrix(rain_grades, umbrella_rain),
     ]
-    # for item in R:
-    #     print(item)
     return R
 
-def nonlinear_rules_set(discretion_factor=0):
-    pass
+def car_breaking_rules_set(discretion_factor=3):
+    road_wetness = fs.fuzzy_generator([0, 25, 50, 75, 100], [0, 0.3, 0.6, 1], discretion_factor)
+    wet_distance = fs.fuzzy_generator([0,100,200,300,400,500,600,700,800], [1,0.9,0.8,0.7,0.6,0.5,0.3,0.1], discretion_factor)
+
+    car_speed = fs.fuzzy_generator([0, 50, 60, 90, 110, 130, 160], [0, 0.3, 0.5, 0.7, 0.9, 1], discretion_factor)
+    speed_distance = fs.fuzzy_generator([0,100,200,300,400,500,600,700,800], [1,0.9,0.8,0.7,0.6,0.5,0.3,0.1], discretion_factor)
+
+    car_weight = fs.fuzzy_generator([0, 700, 900, 1100, 1500], [0, 0.3, 0.6, 1], discretion_factor)
+    weight_distance = fs.fuzzy_generator([0,100,200,300,400,500,600,700,800], [1,0.9,0.8,0.7,0.6,0.5,0.3,0.1], discretion_factor)
+
+    R = [
+    create_relation_matrix(road_wetness, wet_distance),
+    create_relation_matrix(car_speed, speed_distance),
+    #create_relation_matrix(car_weight, weight_distance),
+    ]
+    return R
 
 def cars_rules_set(discretion_factor=0):
     rule = np.zeros(shape=(6,6))

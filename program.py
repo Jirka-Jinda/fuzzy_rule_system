@@ -54,25 +54,42 @@ def defuzzufication_procedure(fuzzy_ouput):
 # input = fuzzy_set.fuzzy_set([(4,1),(2,0.4)])
 
 #------------------- Destnik -------------------
-# Mam si vzit destnik?
+# # Mam si vzit destnik?
+# # 0-11 low; 12-29 medium; 30-39 strong; 49-50 very_strong_wind; 50-115 storm - km/h
+# # 0-2.5 low; 2.6-8 medium; 8.1-40 high; 40-100 drowning - mm/m2
+# umbrella_input = [[],[]]
+# umbrella_fuzzy_input = []
+# # fuzzifikace
+# for input in umbrella_input:
+#     umbrella_fuzzy_input.append([fuzzification_procedure(input)])
+# # inference
+# weather_rules = rules.weather_rules_set()
+# umbrella_fuzzy_output = inference_procedure(weather_rules, umbrella_fuzzy_input)
+# # deffuzifikace
+# print(umbrella_fuzzy_output.all_elements())
+# umbrella_output = defuzzufication_procedure(umbrella_fuzzy_output)
+# if umbrella_output < 0.5:
+#     print("Destnik bych si nebral.")
+# elif umbrella_output >= 0.5:
+#     print("Vzal bych si destnik.")
+# print(umbrella_output)
 
-# vitr = 5 km/h, dest = 40 mm/h, slunce = 10000 lx (denni svetlo)
-umbrella_input = [[35]]
-umbrella_fuzzy_input = []
+#----------- Brzdeni na silnici ------
+
+# mokra silnice = 10%, rychlost = 55 km/h
+road_input = [[10],[150]]
+road_fuzzy_input = []
 # fuzzifikace
-for input in umbrella_input:
-    umbrella_fuzzy_input.append([fuzzification_procedure(input)])
+for input in road_input:
+    road_fuzzy_input.append([fuzzification_procedure(input)])
 # inference
-weather_rules = rules.weather_rules_set()
-umbrella_fuzzy_output = inference_procedure(weather_rules, umbrella_fuzzy_input)
-print(umbrella_fuzzy_output.all_elements())
+car_rules = rules.car_breaking_rules_set()
+car_fuzzy_output = inference_procedure(car_rules, road_fuzzy_input)
 # deffuzifikace
-umbrella_output = defuzzufication_procedure(umbrella_fuzzy_output)
-print("Vem si destnik na", umbrella_output*10, "%.")
+gd.draw_graph([car_fuzzy_output])
+car_output = defuzzufication_procedure(car_fuzzy_output)
+print("Zacni brzdit zhruba:", car_output, "metru pred prekazkou.")
 
-#----------- Nelinearni fce ~ interpolace ------
-
-#
 
 # input = fuzzy_set.fuzzy_set([(4,1),(2,0.4)])
 # print(input.all_elements())

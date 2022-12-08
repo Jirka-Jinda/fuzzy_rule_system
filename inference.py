@@ -16,7 +16,7 @@ def infer(rules: list, inputs: list) -> fs.fuzzy_set:
     return result
 
 # Applying Compositional Rule of Inferece
-def CRI(rule: np.ndarray, input:fs.fuzzy_set, operation=fo.tnorm_Goguen) -> fs.fuzzy_set:
+def CRI(rule: np.ndarray, input:fs.fuzzy_set, operation=fo.tnorm_Lukas) -> fs.fuzzy_set:
     result = fs.fuzzy_set([])
     if isinstance(input, list):
         input = input[0]
@@ -28,6 +28,6 @@ def CRI(rule: np.ndarray, input:fs.fuzzy_set, operation=fo.tnorm_Goguen) -> fs.f
         else:
             fs_i = []
             for i in range(rule[input_val].size):
-                fs_i.append((i+1, operation(input_deg, rule[input_val][i])))
+                fs_i.append((i, operation(input_deg, rule[input_val][i])))
             result = fo.union(result, fs.fuzzy_set(fs_i))
     return result
